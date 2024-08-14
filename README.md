@@ -68,3 +68,47 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Prérequis
+
+Avant de commencer, assurez-vous d'avoir installé Node.js et npm sur votre machine. Vous pouvez les télécharger et les installer à partir de [https://nodejs.org/](https://nodejs.org/).
+
+## Installation
+
+Pour installer les dépendances du projet, exécutez la commande suivante dans le répertoire racine du projet :
+
+```bash
+npm install
+```
+
+Cette commande installera toutes les dépendances nécessaires à l'exécution du projet, comme défini dans le fichier `package.json`.
+
+Assurez-vous d'avoir PostgreSQL sur votre ordinateur ainsi qu'un serveur qui est dédié au projet.
+Vous pouvez trouver un fichier ".env.example" dans le projet. Modifiez le fichier avec votre string de connexion et les autres variables :
+
+```
+  DATABASE_URL="postgresql://username:password@localhost:5432/database?schema=public"
+  JWT_SECRET="your_secret"
+  PORT="your_port"
+```
+
+- DATABASE_URL : La string de connxion à la database.
+- JWT_SECRET : La clé qui permet d'encoder les tokens JWT.
+- PORT : Le port sur lequel le backend tourne
+
+Une fois ceci fait, lancez des migrations via prisma au travers de votre terminal :
+
+```bash
+  npx prisma migrate dev
+```
+
+Pour generer les donné dans la basse de donné depuis le dossier backend 
+
+```node prisma/seed.js```
+
+
+Lancement du server depuis de fichier backend 
+```
+npm start
+```
+
