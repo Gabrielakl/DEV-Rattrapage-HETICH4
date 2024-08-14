@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String        @id @default(uuid())
+  name            String?
+  email           String        @unique
+  password        String
+  created_at      DateTime      @default(now())
+
+  pokemon         Pokemon[]
+}
+
+model Pokemon {
+  id              String        @id @default(uuid())
+  created_at      DateTime      @default(now())
+  health          Int
+  attack          Int
+  userId          String
+  basePokemonId   String
+
+  basePokemon     BasePokemon   @relation(fields: [basePokemonId], references: [id])
+  user            User          @relation(fields: [userId], references: [id])
+  // Supprimer cette ligne car la relation est maintenant dans BasePokemon
+  // technics        Technics[]    // Relation inverse avec Technics
+}
+
+model BasePokemon {
+  id          String     @id @default(uuid())
+  name        String
+  type        String
+  health      Int        @default(0)
+  attack      Int        @default(0)
+  sprite      String     @default("")
+  created_at  DateTime   @default(now())
+  pokemons    Pokemon[]  // Relation avec Pokemon
+  technics    Technics[] // Nouvelle relation avec Technics
+}
+
+model Technics {
+  id              String        @id @default(uuid())
+  name            String
+  created_at      DateTime      @default(now())
+  attack          Int
+  type            String
+
+  basePokemonId   String
+  basePokemon     BasePokemon   @relation(fields: [basePokemonId], references: [id])
+}
