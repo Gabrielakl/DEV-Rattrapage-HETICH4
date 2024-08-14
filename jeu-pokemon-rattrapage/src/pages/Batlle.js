@@ -29,7 +29,7 @@ function Battle() {
 
         const config = {
             type: Phaser.AUTO,
-            width: 800,
+            width: 1200,
             height: 800,
             backgroundColor: '#D6B3FF',
             physics: {
